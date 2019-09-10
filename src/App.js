@@ -96,7 +96,6 @@ function App() {
 				}
 			}
 		}
-
 		//console.log('displayHistory:', displayHistory);
 		//console.log('currHistory:', currHistory);
 		if(update) {
@@ -106,25 +105,11 @@ function App() {
 		return [currHistory, currDisplay];
 	}
 
-	const calculate = () => {
-
-	}
-	/*
-	const findLastNumber = (attempt) => {
-		let lastInput = displayHistory[displayHistory.length - attempt];
-		if(operators.includes(lastInput)) {
-
-		}
-	}
-	*/
-
 	return (
 		<div className="container">
 			<Logo />
 			<div className="App">
-				{/* STEP 4 - Render your components here and be sure to properly import/export all files */
-					
-				}
+				{/* STEP 4 - Render your components here and be sure to properly import/export all files */}
 				<Display display={display} />
 				<div className="mainFlex">
 					<div className="column">

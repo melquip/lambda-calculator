@@ -75,7 +75,7 @@ const [numberState, setNumberState] = useState(numbers);
 - Map over the data and dynamically render components for each piece of data in the arrays.
 - You will need to import the component that you'll render in the map function.
 
-**STEP 4**
+- [x] **STEP 4**
 
 - Import the wrapper button components into `App.js`
 - Import the display components into `App.js` as well
@@ -84,7 +84,7 @@ const [numberState, setNumberState] = useState(numbers);
 - Style your project using any of the techniques from the module
 - Don't forget about className vs class on your JSX elements!!
 
-**STEP 5 - (STRETCH)**
+- [x] **STEP 5 - (STRETCH)**
 It's time to start thinking about functionality. Before getting into this, let's try and plan out all the moving pieces you'll need.
 
 You will have some state in `App` that will keep track of the totals. This is data that you'll pass to the display component to render in the display.
