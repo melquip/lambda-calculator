@@ -1,10 +1,11 @@
 import React from "react";
 
-const Display = () => {
+const Display = ({ display }) => {
 	return (
 		<div className="display">
 			{
 				/* Display any props data here */
+				display
 			}
 		</div>
 	);

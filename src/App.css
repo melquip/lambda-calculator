@@ -1,22 +1,98 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	box-sizing: border-box;
+}
+body {
+	background-color: #ccc;
+}
 .container {
-    background-color: #c00025;
-    width: 100%;
-    max-width: 550px;
-    border-radius: 15px;
-    border: 2px solid grey;
-    padding-bottom: 25px;
+	background-color: #c00025;
+	width: 100%;
+	max-width: 472px;
+	border-radius: 15px;
+	border: 2px solid grey;
+	padding: 32px;
+	margin: 50px auto;
+}
+.logo {
+	max-height: 35px
 }
 .display {
-    margin-top: 25px;
-    height: 100px;
-    width: 450px;
-    border-radius: 50px;
-    color: white;
-    background-color: #322c2d;
-    box-shadow: 1px 1px #322c2d;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding-right: 8%;
-    font-size: 5.0rem;
-  }
+	margin-top: 16px;
+	margin-bottom: 16px;
+	width: 100%;
+	height: 100px;
+	border-radius: 50px;
+	color: white;
+	background-color: #322c2d;
+	box-shadow: 1px 1px #322c2d;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	padding-right: 8%;
+	font-size: 3.2rem;
+	line-height: 100px;
+}
+button {
+	cursor: pointer;
+	appearance: none;
+	
+	border-radius: 80px;
+	border: 0;
+
+	margin-top: 12px;
+
+	width: 80px;
+	flex-basis: 80px;
+	height: 80px;
+
+	color: white;
+	font-size: 2rem;
+	line-height: 80px;
+	text-align: center;
+
+	box-shadow: 0 4px 0 rgba(0,0,0,.5);
+	transition: all 0.15s ease-in-out;
+}
+button:active {
+	box-shadow: 0 0 0 rgba(0,0,0,.5);
+	transform: translateY(4px);
+}
+button.large {
+	width: 192px;
+	flex-basis: 192px;
+	height: 75px;
+	line-height: 75px;
+	margin-top: 17px;
+}
+.numbers, .operators, .specials {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.operators {
+	justify-content: flex-end;
+}
+.numbers button {
+	background-color: rgb(70, 94, 173);
+}
+.operators button {
+	background-color: rgb(88, 165, 190);
+}
+.specials button {
+	background-color: rgb(88, 165, 190);
+}
+.mainFlex {
+	display: flex;
+	justify-content: space-between;
+}
+.mainFlex .column:nth-child(1) {
+	width: 75%;
+	flex-basis: 75%;
+}
+.mainFlex .column:nth-child(2) {
+	width: 25%;
+	flex-basis: 25%;
+}
