@@ -18,15 +18,74 @@ function App() {
 	// the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
 	// Don't forget to pass the functions (and any additional data needed) to the components as props
 
-	const calcBtnClickHandler = (button) => {
-		if(numbers.includes(button)) {
+	const [display, setDisplay] = useState("0");
+	const [displayHistory, setHistory] = useState(["0"]);
+	const calculate = (operation, n1, n2) => {
 
-		} else {
+	}
+	const calcBtnClickHandler = (button) => {
+		let lastInput = displayHistory[displayHistory.length - 1];
+		let currHistory = displayHistory;
+		let currDisplay = display;
+		let standardOperators = ['/', '*', '-', '+'];
+		if(numbers.includes(button)) {
+			if(button === "." && lastInput.includes(".")) {
+				return false;
+			}
+			let number = (display.toString() !== "0" ? display.toString() + button : button);
+			currHistory = displayHistory.concat(number);
+			currDisplay = number;
+		} else if(specials.includes(button)) {
+			if(button === 'C') {
+				currDisplay = 0;
+				currHistory = [0];
+			}
+			if(button === "+/-") {
+				currDisplay = Number(display) * -1;
+				let changedHistory = [...displayHistory];
+				changedHistory[changedHistory.length - 1] = currDisplay.toString();
+				currHistory = changedHistory;
+			}
+			if(button === "%") {
+				//setDisplay()
+			}
+		} else if(operators.includes(button)) {
+			console.log(button);
+			if(button.value !== '=') {
+				if (lastInput !== button && standardOperators.includes(lastInput)) {
+					let changedHistory = [...displayHistory];
+					changedHistory[changedHistory.length - 1] = button.value;
+					currHistory = changedHistory;
+					currDisplay = Number(currHistory[currHistory.length - 2]) + ` ${button.value}`;
+				} else if(lastInput !== button.value) {
+					currHistory = displayHistory.concat(button.value);
+					currDisplay += ` ${button.value}`;
+				}
+			} else {
+				let newDisplay = calculate();
+				currHistory = displayHistory.concat(newDisplay.toString());
+				currDisplay = newDisplay;
+			}
+		}
+
+		console.log('displayHistory:', displayHistory);
+		console.log('currHistory:', currHistory);
+		setHistory(currHistory)
+		setDisplay(currDisplay);
+		return true;
+	}
+
+	const calculate = () => {
+
+	}
+	/*
+	const findLastNumber = (attempt) => {
+		let lastInput = displayHistory[displayHistory.length - attempt];
+		if(operators.includes(lastInput)) {
 
 		}
 	}
-
-	const [display, setDisplay] = useState(0);
+	*/
 
 	return (
 		<div className="container">

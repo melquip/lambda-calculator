@@ -63,9 +63,6 @@ button:active {
 button.large {
 	width: 192px;
 	flex-basis: 192px;
-	height: 75px;
-	line-height: 75px;
-	margin-top: 17px;
 }
 .numbers, .operators, .specials {
 	display: flex;
@@ -76,13 +73,13 @@ button.large {
 	justify-content: flex-end;
 }
 .numbers button {
-	background-color: rgb(70, 94, 173);
+	background-color: rgb(57, 77, 143);
 }
 .operators button {
 	background-color: rgb(88, 165, 190);
 }
 .specials button {
-	background-color: rgb(88, 165, 190);
+	background-color: rgb(88, 120, 190);
 }
 .mainFlex {
 	display: flex;
