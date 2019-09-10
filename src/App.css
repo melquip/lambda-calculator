@@ -31,9 +31,12 @@ body {
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
-	padding-right: 8%;
+	text-align: right;
+	padding: 0 8%;
 	font-size: 3.2rem;
 	line-height: 100px;
+	overflow: hidden;
+	white-space: nowrap;
 }
 button {
 	cursor: pointer;

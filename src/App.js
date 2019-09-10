@@ -20,9 +20,6 @@ function App() {
 
 	const [display, setDisplay] = useState("0");
 	const [displayHistory, setHistory] = useState(["0"]);
-	const calculate = (operation, n1, n2) => {
-
-	}
 	const calcBtnClickHandler = (button) => {
 		let lastInput = displayHistory[displayHistory.length - 1];
 		let currHistory = displayHistory;
@@ -32,7 +29,12 @@ function App() {
 			if(button === "." && lastInput.includes(".")) {
 				return false;
 			}
-			let number = (display.toString() !== "0" ? display.toString() + button : button);
+			let _display = currDisplay.toString();
+			let number = (
+				_display === "0" || 
+				standardOperators.includes(_display[_display.length - 1]) ? 
+					button : _display + button
+			);
 			currHistory = displayHistory.concat(number);
 			currDisplay = number;
 		} else if(specials.includes(button)) {
@@ -62,9 +64,23 @@ function App() {
 					currDisplay += ` ${button.value}`;
 				}
 			} else {
-				let newDisplay = calculate();
-				currHistory = displayHistory.concat(newDisplay.toString());
-				currDisplay = newDisplay;
+				let lastOperatorIndex = -1;
+				displayHistory.forEach((hist, i) => {
+					if(standardOperators.includes(hist)) {
+						lastOperatorIndex = i;
+					}
+				});
+				if(lastOperatorIndex > -1) {
+					let n1 = Number(displayHistory[lastOperatorIndex - 1]);
+					let n2 = Number(currDisplay);
+					let op = displayHistory[lastOperatorIndex];
+					if(lastOperatorIndex === displayHistory.length - 1) {
+						n2 = n1;
+					}
+					let newDisplay = eval(`${n1} ${op} ${n2}`);
+					currHistory = [newDisplay.toString()];
+					currDisplay = newDisplay;
+				}
 			}
 		}
 
