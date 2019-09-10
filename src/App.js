@@ -20,7 +20,7 @@ function App() {
 
 	const [display, setDisplay] = useState("0");
 	const [displayHistory, setHistory] = useState(["0"]);
-	const calcBtnClickHandler = (button) => {
+	const calcBtnClickHandler = (button, update = true) => {
 		let lastInput = displayHistory[displayHistory.length - 1];
 		let currHistory = displayHistory;
 		let currDisplay = display;
@@ -35,7 +35,7 @@ function App() {
 				standardOperators.includes(_display[_display.length - 1]) ? 
 					button : _display + button
 			);
-			currHistory = displayHistory.concat(number);
+			currHistory = currHistory.concat(number);
 			currDisplay = number;
 		} else if(specials.includes(button)) {
 			if(button === 'C') {
@@ -43,24 +43,37 @@ function App() {
 				currHistory = [0];
 			}
 			if(button === "+/-") {
-				currDisplay = Number(display) * -1;
-				let changedHistory = [...displayHistory];
-				changedHistory[changedHistory.length - 1] = currDisplay.toString();
-				currHistory = changedHistory;
+				if(!standardOperators.includes(currDisplay[currDisplay.length - 1])) {
+					currDisplay = Number(display) * -1;
+					let changedHistory = [...currHistory];
+					changedHistory[changedHistory.length - 1] = currDisplay.toString();
+					currHistory = changedHistory;
+				}
 			}
 			if(button === "%") {
-				//setDisplay()
+				if(!standardOperators.includes(currDisplay[currDisplay.length - 1])) {
+					currDisplay = Number(currDisplay) / 100;
+					let changedHistory = [...currHistory];
+					changedHistory[changedHistory.length - 1] = currDisplay.toString();
+					currHistory = changedHistory;
+				}
 			}
 		} else if(operators.includes(button)) {
-			console.log(button);
+			//console.log(button);
 			if(button.value !== '=') {
-				if (lastInput !== button && standardOperators.includes(lastInput)) {
+				if(!standardOperators.includes(currDisplay[currDisplay.length - 1])) {
+					let data = calcBtnClickHandler(operators[operators.length - 1], false);
+					currHistory = data[0];
+					currDisplay = data[1];
+				}
+
+				if (lastInput !== button.value && standardOperators.includes(lastInput)) {
 					let changedHistory = [...displayHistory];
 					changedHistory[changedHistory.length - 1] = button.value;
 					currHistory = changedHistory;
-					currDisplay = Number(currHistory[currHistory.length - 2]) + ` ${button.value}`;
+					currDisplay = Number(displayHistory[displayHistory.length - 2]) + ` ${button.value}`;
 				} else if(lastInput !== button.value) {
-					currHistory = displayHistory.concat(button.value);
+					currHistory = currHistory.concat(button.value);
 					currDisplay += ` ${button.value}`;
 				}
 			} else {
@@ -84,11 +97,13 @@ function App() {
 			}
 		}
 
-		console.log('displayHistory:', displayHistory);
-		console.log('currHistory:', currHistory);
-		setHistory(currHistory)
-		setDisplay(currDisplay);
-		return true;
+		//console.log('displayHistory:', displayHistory);
+		//console.log('currHistory:', currHistory);
+		if(update) {
+			setHistory(currHistory);
+			setDisplay(currDisplay);
+		}
+		return [currHistory, currDisplay];
 	}
 
 	const calculate = () => {
